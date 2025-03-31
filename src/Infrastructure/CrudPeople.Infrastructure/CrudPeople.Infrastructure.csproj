@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Mongo\Context\Command\" />
+    <Folder Include="Mongo\Context\Query\" />
+    <Folder Include="Mongo\Repositories\People\Command\" />
+    <Folder Include="Mongo\Repositories\People\Query\" />
+    <Folder Include="Mongo\Repositories\PersonType\" />
+    <Folder Include="Postgre\Context\Command\" />
+    <Folder Include="Postgre\Context\Query\" />
+    <Folder Include="Postgre\Repositories\People\Command\" />
+    <Folder Include="Postgre\Repositories\People\Query\" />
+    <Folder Include="Postgre\Repositories\PersonType\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\CrudPeople.CoreDomain\CrudPeople.CoreDomain.csproj" />
+    <ProjectReference Include="..\Packages\ElasticLogger\ElasticLogger.csproj" />
+    <ProjectReference Include="..\Packages\EventStore\EventStore.csproj" />
+    <ProjectReference Include="..\Packages\Helpers\Helpers.csproj" />
+  </ItemGroup>
+
+</Project>
