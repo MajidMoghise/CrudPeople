@@ -35,8 +35,7 @@ namespace CrudPeople.Infrastructure.Configs
         }
         private static IServiceCollection AddScoppedServiceApplication(this IServiceCollection services)
         {
-            return services.AddScoped<IGroupServiceApplication, GroupServiceApplication>()
-                           .AddScoped<IPeopleServiceApplication, PeopleServiceApplication>();
+            return services;
         }
         private static IServiceCollection AddSingeltonServiceApplication(this IServiceCollection services)
         {
