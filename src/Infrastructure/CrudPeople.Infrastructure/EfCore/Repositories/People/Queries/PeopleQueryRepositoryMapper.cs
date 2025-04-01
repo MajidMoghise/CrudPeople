@@ -1,19 +1,36 @@
-﻿using People.Domain.Contract.Repositories.People.Query.Modles;
-using People.Domain.DataModels.DataModels.Queries;
+﻿
+using CrudPeople.CoreDomain.Contracts.People.Query.Models;
+using CrudPeople.CoreDomain.Entities.People.Query;
 
-namespace IDP.Infrastructure.Repositories.Attributes.Queries
+namespace CrudPeople.Infrastructure.EfCore.Repositories.People.Queries
 {
     internal class PeopleQueryRepositoryMapper
     {
-        internal PeopleGetResponseModel PeopleGetResponseModel(PeopleDataEntityQuery s)
+        internal PeopleResponseModel PeopleResponseModel(PeopleQueryEntity s)
         {
-            return new PeopleGetResponseModel
+            return new PeopleResponseModel
             {
                 FirstName = s.FirstName,
                 LastName = s.LastName,
                 NationalCode = s.NationalCode,
-                PersonRowVersion = s.PersonRowVersion,
-                PersonId = s.Id
+                RowVersion = s.RowVersion,
+                Id = s.Id,
+                BirthDate = s.BirthDate,
+                PersonTypeId = s.PersonTypeId,
+                PersonTypeName= s.PersonTypeName    
+            };
+        } internal PersonResponseModel PersonResponseModel(PeopleQueryEntity s)
+        {
+            return new PersonResponseModel
+            {
+                FirstName = s.FirstName,
+                LastName = s.LastName,
+                NationalCode = s.NationalCode,
+                RowVersion = s.RowVersion,
+                Id = s.Id,
+                BirthDate = s.BirthDate,
+                PersonTypeId = s.PersonTypeId,
+                PersonTypeName= s.PersonTypeName    
             };
         }
     }

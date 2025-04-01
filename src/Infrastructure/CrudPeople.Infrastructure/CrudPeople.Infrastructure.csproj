@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\CrudPeople.ApplicationService\CrudPeople.ApplicationService.csproj" />
     <ProjectReference Include="..\..\Core\CrudPeople.CoreDomain\CrudPeople.CoreDomain.csproj" />
     <ProjectReference Include="..\Packages\ElasticLogger\ElasticLogger.csproj" />
     <ProjectReference Include="..\Packages\EventStore\EventStore.csproj" />

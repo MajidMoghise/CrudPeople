@@ -3,12 +3,12 @@ using ElasticLogger;
 using IDP.Infrastructure.Repositories.Attributes.Command;
 using People.Domain.DataModels.DataModels.Commands;
 using People.Infrastructure.Ef.Configs.DbContexts.Command;
-using People.Domain.Contract.Repositories.Base.Commands;
 using IDP.Domain.Contract.Repositories.Attributes.Command;
 using People.Domain.Contract.Repositories.People.Command.Modles;
 using Azure.Core;
 using CrudPeople.Infrastructure.EfCore.Repositories.Base.Commands.Base;
 using CrudPeople.CoreDomain.Contracts.Base.Commands.Models;
+using CrudPeople.CoreDomain.Contracts.Base.Commands;
 
 namespace People.Infrastructure.Ef.Repositories.People.Commands
 {

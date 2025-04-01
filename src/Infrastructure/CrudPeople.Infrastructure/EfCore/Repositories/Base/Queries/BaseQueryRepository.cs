@@ -1,5 +1,4 @@
-﻿using CrudPeople.CoreDomain.Contracts.Base.Queries.Models;
-using CrudPeople.Infrastructure.EfCore.Context.Query;
+﻿using CrudPeople.Infrastructure.EfCore.Context.Query;
 using ElasticLogger;
 using Helpers.FilterSearch;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +8,7 @@ using System.Linq.Expressions;
 namespace CrudPeople.Infrastructure.EfCore.Repositories.Base.Queries
 {
     [LogCall]
-    public class BaseQueryRepository<TEntity> 
+    public class BaseQueryRepository<TEntity> where TEntity : class
     {
         protected readonly Ef_QueryDbContext _context;
         protected readonly DbSet<TEntity> _entity;

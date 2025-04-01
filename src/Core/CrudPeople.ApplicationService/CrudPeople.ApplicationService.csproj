@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\Packages\Helpers\Helpers.csproj" />
+	<InternalsVisibleTo Include="CrudPeople.Infrastructure" />
   </ItemGroup>
 
 </Project>

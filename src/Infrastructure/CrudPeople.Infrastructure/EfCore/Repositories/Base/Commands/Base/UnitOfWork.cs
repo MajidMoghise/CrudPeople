@@ -1,13 +1,11 @@
-﻿using EventStore;
+﻿using CrudPeople.CoreDomain.Contracts.Base.Commands;
+using CrudPeople.Infrastructure.EfCore.Context.Command;
+using CrudPeople.Infrastructure.EfCore.Context.Query;
+using EventStore;
 using EventStore.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
-using People.Domain.Contract.Repositories.Base.Commands;
-using People.Infrastructure.Ef.Configs.DbContexts.Command;
-using People.Infrastructure.Ef.Configs.DbContexts.Query;
-using System.Data;
-using System.Text.RegularExpressions;
 using System.Transactions;
 
 namespace CrudPeople.Infrastructure.EfCore.Repositories.Base.Commands.Base

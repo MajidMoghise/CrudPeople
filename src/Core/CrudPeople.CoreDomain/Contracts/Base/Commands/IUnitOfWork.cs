@@ -1,4 +1,4 @@
-﻿namespace People.Domain.Contract.Repositories.Base.Commands
+﻿namespace CrudPeople.CoreDomain.Contracts.Base.Commands
 {
     public interface IUnitOfWork
     {

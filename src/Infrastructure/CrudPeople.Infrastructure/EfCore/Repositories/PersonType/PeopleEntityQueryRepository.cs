@@ -1,47 +1,39 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ElasticLogger;
-using IDP.Infrastructure.Repositories.Attributes.Command;
-using People.Domain.DataModels.DataModels.Commands;
-using People.Infrastructure.Ef.Repositories.Base.Commands.Base;
-using People.Infrastructure.Ef.Configs.DbContexts.Command;
-using People.Domain.Contract.Repositories.Base.Commands;
-using IDP.Domain.Contract.Repositories.Attributes.Command;
-using People.Domain.Contract.Repositories.People.Command.Modles;
-using Azure.Core;
-using IDP.Domain.Contract.Repositories.Attributes.Query;
-using People.Domain.DataModels.DataModels.Queries;
-using IDP.Infrastructure.Repositories.Attributes.Queries;
-using People.Infrastructure.Ef.Configs.DbContexts.Query;
-using People.Domain.Contract.Repositories.People.Query.Modles;
 using Helpers.FilterSearch;
-using System.Runtime.CompilerServices;
 using CrudPeople.Infrastructure.EfCore.Repositories.Base.Queries;
-using CrudPeople.CoreDomain.Contracts.Base.Queries.Models;
+using CrudPeople.Infrastructure.EfCore.Repositories.People.Queries;
+using CrudPeople.CoreDomain.Entities.People.Query;
+using CrudPeople.Infrastructure.EfCore.Context.Query;
+using CrudPeople.CoreDomain.Contracts.Base.Commands;
+using CrudPeople.CoreDomain.Contracts.People.Query.Models;
+using CrudPeople.CoreDomain.Entities;
+using CrudPeople.CoreDomain.Contracts.PersonType;
+using CrudPeople.CoreDomain.Contracts.PersonType.Models;
 
-namespace People.Infrastructure.Ef.Repositories.People.Queries
+namespace CrudPeople.Infrastructure.EfCore.Repositories.PersonType
 {
     [LogCall]
-    public class PeopleEntityQueryRepository : BaseQueryRepository<PeopleDataEntityQuery>, IPeopleEntityQueryRepository
+    public class PersonTypeRepository : BaseQueryRepository<CrudPeople.CoreDomain.Entities.PersonType>, IPersonTypeRepository
     {
         private readonly PeopleQueryRepositoryMapper _mapper;
-        public PeopleEntityQueryRepository(Ef_QueryDbContext context, IUnitOfWork unitOfWork) : base(context)
+        public PersonTypeRepository(Ef_QueryDbContext context, IUnitOfWork unitOfWork) : base(context)
         {
             _mapper = new PeopleQueryRepositoryMapper();
 
         }
 
-        public async Task<SearchResponseModel<PeopleGetResponseModel>> GetPeopleByFilter(SearchModel<PeopleGetRequestModel, PeopleGetResponseModel> request)
+        public async Task<PersonTypeResponseModel> GetById(byte id)
         {
-            var query = request.ToSqlQuery();
-           
-          return await  _entity.FromSql(query)
-                               .Select(s=> _mapper.PeopleGetResponseModel(s))
-                               .ToPagedListAsync(request.Page, request.Size);
+            return await _entity.Select(s => _mapper.PersonTypeResponseModel(s)).FirstOrDefaultAsync(f => f.Id == id);
         }
 
-        public Task<PeopleDataEntityQuery> GetPoepleByIdAsync(Guid id)
+        public async Task<List<PersonTypeResponseModel>> GetList()
         {
-            return _entity.FirstOrDefaultAsync(f => f.Id == id);
+            return await _entity.Select(s => _mapper.PersonTypeResponseModel(s)).ToListAsync();
+
+
         }
+
     }
 }

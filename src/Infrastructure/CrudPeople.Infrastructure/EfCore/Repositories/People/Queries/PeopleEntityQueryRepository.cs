@@ -1,27 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ElasticLogger;
-using IDP.Infrastructure.Repositories.Attributes.Command;
-using People.Domain.DataModels.DataModels.Commands;
-using People.Infrastructure.Ef.Repositories.Base.Commands.Base;
-using People.Infrastructure.Ef.Configs.DbContexts.Command;
-using People.Domain.Contract.Repositories.Base.Commands;
-using IDP.Domain.Contract.Repositories.Attributes.Command;
-using People.Domain.Contract.Repositories.People.Command.Modles;
-using Azure.Core;
-using IDP.Domain.Contract.Repositories.Attributes.Query;
-using People.Domain.DataModels.DataModels.Queries;
-using IDP.Infrastructure.Repositories.Attributes.Queries;
-using People.Infrastructure.Ef.Configs.DbContexts.Query;
-using People.Domain.Contract.Repositories.People.Query.Modles;
 using Helpers.FilterSearch;
-using System.Runtime.CompilerServices;
 using CrudPeople.Infrastructure.EfCore.Repositories.Base.Queries;
-using CrudPeople.CoreDomain.Contracts.Base.Queries.Models;
+using CrudPeople.CoreDomain.Contracts.People.Query;
+using CrudPeople.Infrastructure.EfCore.Context.Query;
+using CrudPeople.CoreDomain.Contracts.People.Query.Models;
+using CrudPeople.Infrastructure.EfCore.Repositories.People.Queries;
+using CrudPeople.CoreDomain.Entities.People.Query;
+using CrudPeople.CoreDomain.Contracts.Base.Commands;
 
 namespace CrudPeople.Infrastructure.EfCore.Repositories.People
 {
     [LogCall]
-    public class PeopleEntityQueryRepository : BaseQueryRepository<PeopleDataEntityQuery>, IPeopleEntityQueryRepository
+    public class PeopleEntityQueryRepository : BaseQueryRepository<PeopleQueryEntity>, IPeopleQueryRepository
     {
         private readonly PeopleQueryRepositoryMapper _mapper;
         public PeopleEntityQueryRepository(Ef_QueryDbContext context, IUnitOfWork unitOfWork) : base(context)
@@ -30,18 +21,19 @@ namespace CrudPeople.Infrastructure.EfCore.Repositories.People
 
         }
 
-        public async Task<SearchResponseModel<PeopleGetResponseModel>> GetPeopleByFilter(SearchModel<PeopleGetRequestModel, PeopleGetResponseModel> request)
+        public async Task<SearchResponseModel<PeopleResponseModel>> GetList(SearchRequestModel<PeopleRequestModel, PeopleResponseModel> request)
         {
             var query = request.ToSqlQuery();
            
           return await  _entity.FromSql(query)
-                               .Select(s=> _mapper.PeopleGetResponseModel(s))
+                               .Select(s=> _mapper.PeopleResponseModel(s))
                                .ToPagedListAsync(request.Page, request.Size);
         }
 
-        public Task<PeopleDataEntityQuery> GetPoepleByIdAsync(Guid id)
+        public async Task<PersonResponseModel> GetById(Guid id)
         {
-            return _entity.FirstOrDefaultAsync(f => f.Id == id);
+            return await _entity.Select(s => _mapper.PersonResponseModel(s))
+                          .FirstOrDefaultAsync(f => f.Id == id);
         }
     }
 }

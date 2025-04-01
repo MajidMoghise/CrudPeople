@@ -2,21 +2,11 @@
 using CrudPeople.Infrastructure.EfCore.Context.Command;
 using ElasticLogger;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
-using People.Domain.Contract.Repositories.Base.Commands;
-using People.Domain.DataModels.DataModels.Base;
-using People.Infrastructure.Ef.Configs.DbContexts.Command;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CrudPeople.Infrastructure.EfCore.Repositories.Base.Commands.Base
 {
     [LogCall]
-    public class BaseCommandRepository<TEntity> : IBaseCommandRepository<TEntity> 
+    public class BaseCommandRepository<TEntity> : IBaseCommandRepository<TEntity> where TEntity : class
     {
         protected readonly Ef_CommandDbContext _context;
         protected readonly DbSet<TEntity> _entity;

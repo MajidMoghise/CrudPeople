@@ -15,21 +15,14 @@ using System.Xml;
 
 namespace CrudPeople.Infrastructure.EfCore.Context.Query
 {
-    public class Ef_QueryDbContext : DbContext
+    public class Ef_QueryDbContext(DbContextOptions<Ef_QueryDbContext> options, IConfiguration configuration, ILoggerFactory logger) : DbContext(options)
     {
-        private readonly string _connectionString;
-        private readonly IConfiguration _configuration;
+        private readonly string _connectionString = configuration.GetSection("Connections:SqlQuery").Value.ToString();
+        private readonly IConfiguration _configuration = configuration;
         public TransactionStatus TransactionSatatus { get; set; }
         public Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction Transaction { get; set; }
-        private readonly ILoggerFactory _logger;
+        private readonly ILoggerFactory _logger = logger;
 
-        public Ef_QueryDbContext(DbContextOptions<Ef_QueryDbContext> options, IConfiguration configuration, ILoggerFactory logger)
-           : base(options)
-        {
-            _connectionString = configuration.GetSection("Connections:SqlQuery").Value.ToString();
-            _configuration = configuration;
-            _logger = logger;
-        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

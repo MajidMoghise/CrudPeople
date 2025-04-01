@@ -17,6 +17,6 @@ namespace CrudPeople.CoreDomain.Entities.People.Query
         public byte PersonTypeId { get; set; }
         public string PersonTypeName { get; set; }
         public byte[] RowVersion { get; set; }
-        
+        public string DoingUserName { get; set; }
     }
 }

@@ -1,16 +1,19 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using CrudPeople.Infrastructure.EfCore.Context.Command;
+using CrudPeople.Infrastructure.EfCore.Context.Query;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using EventStore;
 namespace CrudPeople.Infrastructure.EfCore
 {
     internal static class RegistrationEf_SQL
     {
-        private static IServiceCollection RegisterSQLDatabase(this IServiceCollection services, IConfiguration configuration)
+        internal static IServiceCollection RegisterSQLDatabase(this IServiceCollection services, IConfiguration configuration)
         {
             var SqlCnnCommand = configuration.GetSection("Connections:Sql:Command").Value;
             var SqlCnnQuery = configuration.GetSection("Connections:Sql:Query").Value;
