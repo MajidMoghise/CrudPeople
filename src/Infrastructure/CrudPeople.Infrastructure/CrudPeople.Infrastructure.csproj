@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Mongo\Context\Command\" />
-    <Folder Include="Mongo\Context\Query\" />
-    <Folder Include="Mongo\Repositories\People\Command\" />
-    <Folder Include="Mongo\Repositories\People\Query\" />
     <Folder Include="Mongo\Repositories\PersonType\" />
     <Folder Include="Postgre\Context\Command\" />
     <Folder Include="Postgre\Context\Query\" />

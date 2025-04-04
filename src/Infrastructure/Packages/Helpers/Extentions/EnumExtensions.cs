@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json;
 namespace Helpers.Extentions
 {
 
@@ -22,7 +23,15 @@ namespace Helpers.Extentions
             }
             catch (Exception) { if (!exceptionRise) return string.Empty; else throw; }
         }
-
+        public static string ToJson<TEnum>() where TEnum : Enum
+        {
+            var enumDictionary = new Dictionary<int, string>();
+            foreach (var value in Enum.GetValues(typeof(TEnum)))
+            {
+                enumDictionary.Add((int)value, value.ToString());
+            }
+            return JsonSerializer.Serialize(enumDictionary);
+        }
         public static T ToEnum<T>(this string value, bool ignoreCase = true) where T : struct, Enum
         {
             if (string.IsNullOrWhiteSpace(value))

@@ -12,7 +12,7 @@ namespace CrudPeople.Infrastructure.Postgre
     {
         internal static IServiceCollection RegisterPostgre(this IServiceCollection services, IConfiguration configuration)
         {
-            return services;//.RegisterSQLDatabase(configuration).RegisterMongoDbDatabase(configuration);
+            return services;
         }
     }
 }

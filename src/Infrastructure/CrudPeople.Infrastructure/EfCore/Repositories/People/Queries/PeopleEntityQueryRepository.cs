@@ -12,10 +12,10 @@ using CrudPeople.CoreDomain.Contracts.Base.Commands;
 namespace CrudPeople.Infrastructure.EfCore.Repositories.People
 {
     [LogCall]
-    public class PeopleEntityQueryRepository : BaseQueryRepository<PeopleQueryEntity>, IPeopleQueryRepository
+    public class PeopleQueryRepository : BaseQueryRepository<PeopleQueryEntity>, IPeopleQueryRepository
     {
         private readonly PeopleQueryRepositoryMapper _mapper;
-        public PeopleEntityQueryRepository(Ef_QueryDbContext context, IUnitOfWork unitOfWork) : base(context)
+        public PeopleQueryRepository(Ef_QueryDbContext context, IUnitOfWork unitOfWork) : base(context)
         {
             _mapper = new PeopleQueryRepositoryMapper();
 

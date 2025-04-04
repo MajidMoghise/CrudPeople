@@ -19,7 +19,7 @@ namespace ElasticLogger
 
         internal static AsyncLocal<LoggModel> LoggLocalModel { get; set; }
 
-        [Advice(Kind.Before)] // you can have also After (async-aware), and Around(Wrap/Instead) kinds
+        [Advice(Kind.Before)] 
         public void LogEnter([Argument(Source.Type)] Type type, [Argument(Source.Name)] string name, [Argument(Source.Arguments)] object[] objcts)
         {
 
@@ -34,7 +34,7 @@ namespace ElasticLogger
                 WriteLog(type.FullName + "." + name, LogFunctionType.CallingMethod, LogType.Trace, JsonConvert.SerializeObject(objcts, settings));
             }
         }
-        [Advice(Kind.Around, Targets = Target.AnyAccess)] // you can have also After (async-aware), and Around(Wrap/Instead) kinds
+        [Advice(Kind.Around, Targets = Target.AnyAccess)] 
         public object Trace(
        [Argument(Source.Type)] Type type,
        [Argument(Source.Name)] string name,
@@ -53,7 +53,7 @@ namespace ElasticLogger
             return result;
 
         }
-        [Advice(Kind.After)] // you can have also After (async-aware), and Around(Wrap/Instead) kinds
+        [Advice(Kind.After)] 
         public void LogOut([Argument(Source.Type)] Type type, [Argument(Source.Name)] string name, [Argument(Source.ReturnValue)] object objcts)
         {
 
@@ -63,7 +63,7 @@ namespace ElasticLogger
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                 };
-                //Log.Information($"Out '{type.FullName}.{name}'( " + JsonConvert.SerializeObject(objcts) + " )");   //you can debug it	
+                
                 WriteLog(type.FullName + "." + name, LogFunctionType.ResultMethod, LogType.Trace, JsonConvert.SerializeObject(objcts, settings));
             }
         }
@@ -104,11 +104,6 @@ namespace ElasticLogger
                 .ForContext(nameof(LoggModel.InstanceId), LoggModel.InstanceId)
                 .ForContext(nameof(LoggModel.ContentRootPath), LoggModel.ContentRootPath)
                 .ForContext(nameof(LoggModel.EnvironmentName), LoggModel.EnvironmentName)
-                      //      .ForContext(nameof(LoggModel.DateTime), LoggLocalModel.Value.DateTime)
-                      //      .ForContext(nameof(LoggModel.LogFunction), LoggLocalModel.Value.LogFunction)
-                      //      .ForContext(nameof(LoggModel.LogType), LoggLocalModel.Value.LogType)
-                      //      .ForContext(nameof(LoggModel.Address), LoggLocalModel.Value.Address)
-                      //      .ForContext(nameof(LoggModel.Argument), LoggLocalModel.Value.Argument)
                       .Information(JsonConvert.SerializeObject(LoggLocalModel.Value, settings));
         }
         public static void SetManualLog(string address, LogType logType, string argument)

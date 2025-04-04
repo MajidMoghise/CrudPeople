@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CrudPeople.Infrastructure.EfCore.Repositories.Base.Queries
 {
-    internal static class Paging
+    internal static class EfPaging
     {
-        internal static SearchResponseModel<TData> ToPagedList<TData>(this IEnumerable<TData> source, int pageIndex, int pageSize) //where TData : IBaseResponseModel
+        internal static SearchResponseModel<TData> ToPagedList<TData>(this IEnumerable<TData> source, int pageIndex, int pageSize) 
         {
             if (source is IQueryable<TData> querable)
             {
@@ -43,7 +43,7 @@ namespace CrudPeople.Infrastructure.EfCore.Repositories.Base.Queries
                 };
             }
         }
-        internal static async Task<SearchResponseModel<TData>> ToPagedListAsync<TData>(this IEnumerable<TData> source, int pageIndex, int pageSize, CancellationToken cancellationToken = default) //where TData : IBaseResponseModel
+        internal static async Task<SearchResponseModel<TData>> ToPagedListAsync<TData>(this IEnumerable<TData> source, int pageIndex, int pageSize, CancellationToken cancellationToken = default) 
         {
             if (source is IQueryable<TData> querable)
             {

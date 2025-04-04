@@ -3,11 +3,11 @@
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\Packages\Helpers\Helpers.csproj" />
+    <ProjectReference Include="..\CrudPeople.CoreDomain\CrudPeople.CoreDomain.csproj" />
 	<InternalsVisibleTo Include="CrudPeople.Infrastructure" />
   </ItemGroup>
 

@@ -3,6 +3,10 @@ using System.Text.Json;
 
 namespace Helpers.FilterSearch
 {
+    public class SearchRequestModel<TResultMode>: SearchRequestModel<TResultMode, TResultMode>
+    {
+
+    }
     public class SearchRequestModel<TRequestModel, TResultModel>
     {
         public int Page { get; set; } = 1;

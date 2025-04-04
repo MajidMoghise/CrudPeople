@@ -13,6 +13,13 @@ namespace CrudPeople.Infrastructure.Configs
 {
     public static class ConfigRegistration
     {
+        public static IServiceCollection ConfigRegisteration(this IServiceCollection services, IConfiguration configuration)
+        {
+            return services.AddDomainService()
+                           .AddRepository(configuration)
+                           .AddServiceApplication()
+                           .RegisterDatabase(configuration);
+        }
         private static IServiceCollection RegisterDatabase(this IServiceCollection services, IConfiguration configuration)
         {
            return services.RegisterSQLDatabase(configuration)

@@ -1,14 +1,12 @@
-﻿using CrudPeople.CoreDomain.Enums;
-
-namespace CrudPeople.ApplicationService
+﻿namespace CrudPeople.API.ViewModels.Persons
 {
-    public class CreatePersonRequestDto
+    public class PersonViewModel
     {
+        public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
-        public PersonType PersonType { get; set; }
         public string NationalCode { get; set; }
-
+        public string PersonTypeName { get; set; }
     }
 }

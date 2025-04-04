@@ -2,15 +2,32 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>409e0b00-5fb6-4f3e-8c36-10e6600b724f</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Elastic.Serilog.Sinks" Version="8.12.3" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.3" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+    <PackageReference Include="Serilog" Version="4.2.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
+    <PackageReference Include="Serilog.Formatting.Elasticsearch" Version="10.0.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="9.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="8.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="8.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="8.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\CrudPeople.ApplicationService\CrudPeople.ApplicationService.csproj" />
+    <ProjectReference Include="..\..\Core\CrudPeople.CoreDomain\CrudPeople.CoreDomain.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\CrudPeople.Infrastructure\CrudPeople.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Packages\ElasticLogger\ElasticLogger.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Packages\EventStore\EventStore.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Packages\Helpers\Helpers.csproj" />
   </ItemGroup>
 
 </Project>

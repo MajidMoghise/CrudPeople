@@ -50,7 +50,6 @@ namespace ElasticLogger
             IndexFormat = "IDP_logs-{0:yyyy.MM.DD}",
             AutoRegisterTemplate = true,
             ModifyConnectionSettings = x => x.BasicAuthentication(Username, password)
-            //  ModifyConnectionSettings = x => x.BasicAuthenticatio () => {  return dic; }  
         })
         .CreateLogger();
             builder.Logging.AddSerilog(logger);

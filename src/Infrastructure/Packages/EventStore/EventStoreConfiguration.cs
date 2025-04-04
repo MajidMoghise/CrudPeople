@@ -12,14 +12,7 @@ namespace EventStore
             var elasticEnabled = Convert.ToBoolean(configuration.GetSection("EventStore:ElasticSearch:IsEnabled").Value);
             var mongoEnabled = Convert.ToBoolean(configuration.GetSection("EventStore:MongoDB:IsEnabled").Value);
             services.AddScoped(sp => new List<EventStoreCollcetionWithModel>());
-            //if (elasticEnabled)
-            //{
            return services.AddScoped<IEventStore, ElasticSearchContext>();
-            //}
-           // else if (mongoEnabled)
-           // {
-           //     services.AddScoped<IEventStore, MongoContext>();
-           // }
            
          
         }

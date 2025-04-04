@@ -10,13 +10,13 @@ using System.Transactions;
 
 namespace CrudPeople.Infrastructure.EfCore.Repositories.Base.Commands.Base
 {
-    public class UnitOfWork : IUnitOfWork, IDisposable
+    public class EFUnitOfWork : IUnitOfWork, IDisposable
     {
         public bool Disposed { get; set; } = false;
 
         private readonly List<EventStoreCollcetionWithModel> _mongoModels;
         private readonly IEventStore _eventStore;
-        public UnitOfWork(Ef_CommandDbContext context, Ef_QueryDbContext queryContext, List<EventStoreCollcetionWithModel> mongoModels, IEventStore eventStore)
+        public EFUnitOfWork(Ef_CommandDbContext context, Ef_QueryDbContext queryContext, List<EventStoreCollcetionWithModel> mongoModels, IEventStore eventStore)
         {
             CommandContext = context ?? throw new ArgumentNullException(nameof(context));
             QueryContext = queryContext ?? throw new ArgumentNullException(nameof(queryContext));
