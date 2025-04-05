@@ -1,5 +1,8 @@
-﻿namespace CrudPeople.API.ViewModels.Persons
+﻿using CrudPeople.API.Attributes;
+
+namespace CrudPeople.API.ViewModels.Persons
 {
+    [DangerousCharacter]
     public class PersonViewModel
     {
         public Guid Id { get; set; }

@@ -1,7 +1,9 @@
-﻿using CrudPeople.CoreDomain.Enums;
+﻿using CrudPeople.API.Attributes;
+using CrudPeople.CoreDomain.Enums;
 
 namespace CrudPeople.API.ViewModels.Persons
 {
+    [DangerousCharacter]
     public class PersonCreateViewModel
     {
         public string FirstName { get; set; }
