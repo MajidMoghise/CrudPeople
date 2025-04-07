@@ -1,0 +1,6 @@
+@CrudPeople.grpc_HostAddress = http://localhost:5220
+
+GET {{CrudPeople.grpc_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

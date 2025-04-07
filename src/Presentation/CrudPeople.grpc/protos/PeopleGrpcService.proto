@@ -1,0 +1,116 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "PeopleGrpcService";
+
+package people;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+service PeopleService {
+  rpc GetPeopleList (SearchPeopleRequest) returns (SearchPeopleResponse);
+  rpc GetPersonById (PersonIdRequest) returns (PersonResponse);
+  rpc CreatePerson (CreatePersonRequest) returns (PersonIdResponse);
+  rpc UpdatePerson (UpdatePersonRequest) returns (google.protobuf.Empty);
+  rpc DeletePerson (DeletePersonRequest) returns (google.protobuf.Empty);
+}
+
+message PersonIdRequest {
+  string id = 1;
+}
+
+message PersonIdResponse {
+  string id = 1;
+}
+
+message PersonResponse {
+  string id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string national_code = 4;
+  string birth_date = 5; //yyyy-mm-dd
+  string person_type_name = 6;
+  bytes row_version = 7;
+}
+
+message CreatePersonRequest {
+  string first_name = 1;
+  string last_name = 2;
+  string national_code = 3;
+  string birth_date = 4;//yyyy-mm-dd
+  PersonType person_type = 5;
+}
+
+message UpdatePersonRequest {
+  string id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string national_code = 4;
+  string birth_date = 5;////yyyy-mm-dd
+  PersonType person_type = 6;
+  bytes row_version = 7;
+}
+
+message DeletePersonRequest {
+  string id = 1;
+  bytes row_version = 2;
+}
+
+message SearchPeopleRequest {
+  int32 page = 1;
+  int32 size = 2;
+  string filter = 3;
+  string order_bies = 4;
+  string group_bies = 5;
+  string selections = 6;
+}
+
+message SearchPeopleResponse {
+  repeated PersonResponse data = 1;
+  int32 total_count = 2;
+  int32 page = 3;
+  int32 total_of_pages = 4;
+}
+
+enum PersonType {
+  UNKOWN_PERSON_TYPE=0;	
+  LEGAL = 1;
+  INDIVIDUAL = 2;
+}
+
+enum FilterOperator {
+  UNKOWN_FILTER_OPERATOR=0;	
+  EQUAL = 1;
+  GREATER = 2;
+  SMALLER = 3;
+  GREATER_EQUAL = 4;
+  SMALLER_EQUAL = 5;
+  UNEQUAL = 6;
+  LIKE_BOTH_SIDES = 7;
+  LIKE_BEGINNING = 8;
+  LIKE_END = 9;
+}
+
+enum OperatorBetweenFilter {
+  UNKOWN_OPERATOR_BETWEEN_FILTER=0;	
+  AND = 1;
+  OR = 2;
+}
+
+enum OrderByType {
+  ASCENDING = 0;
+  DESCENDING = 1;
+}
+
+message FilterModel {
+  string field = 1;
+  FilterOperator operator = 2;
+  string value = 3;
+  OperatorBetweenFilter operator_between_filters = 4;
+}
+
+message OrderByModel {
+  string field = 1;
+  OrderByType order_by_type = 2;
+}

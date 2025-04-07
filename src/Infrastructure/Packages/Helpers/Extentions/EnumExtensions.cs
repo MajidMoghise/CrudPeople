@@ -48,6 +48,7 @@ namespace Helpers.Extentions
                 throw new ArgumentException($"'{value}' is not a valid value for enum type {typeof(T).Name}.");
             }
         }
+
     }
 }
 

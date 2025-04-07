@@ -3,6 +3,7 @@ namespace CrudPeople.ApplicationService
 {
     public class PersonResponseDto
     {
+        public Guid Id{ get; set; }
         public byte[] RowVersion { get; set; }
         public string PersonTypeName { get; set; }
         public string NationalCode { get; set; }
