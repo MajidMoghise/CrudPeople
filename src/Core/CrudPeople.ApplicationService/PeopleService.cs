@@ -1,33 +1,53 @@
-﻿using Helpers.FilterSearch;
+﻿using CrudPeople.CoreDomain.Contracts.People.Command;
+using CrudPeople.CoreDomain.Contracts.People.Query;
+using Helpers.FilterSearch;
 
 namespace CrudPeople.ApplicationService
-{ 
-
+{
     internal class PeopleService : IPeopleService
     {
-        public Task<Guid> CreatePerson(CreatePersonRequestDto request)
+        private readonly PeopleServiceMapper _mapper;
+        private readonly IPeopleQueryRepository _peopleQueryRepository;
+        private readonly IPeopleCommandRepository _peopleCommandRepository;
+        public PeopleService(IPeopleQueryRepository peopleQueryRepository, IPeopleCommandRepository peopleCommandRepository)
         {
-            throw new NotImplementedException();
+            _mapper = new PeopleServiceMapper();
+            _peopleQueryRepository = peopleQueryRepository;
+            _peopleCommandRepository = peopleCommandRepository;
+        }
+        public async Task<Guid> CreatePerson(CreatePersonRequestDto request)
+        {
+            var requestFroDb = _mapper.CreatePersonRequestModel(request);
+            return await _peopleCommandRepository.CreatePerson(requestFroDb);
+
         }
 
-        public Task DeletePerson(DeletePersonRequestDto request)
+        public async Task DeletePerson(DeletePersonRequestDto request)
         {
-            throw new NotImplementedException();
+            var requestFroDb = _mapper.DeletePersonRequestModel(request);
+            await _peopleCommandRepository.DeletePerson(requestFroDb);
+
         }
 
-        public Task<PersonResponseDto> GetById(Guid id)
+        public async Task<PersonResponseDto> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            var resultFromDb=await _peopleQueryRepository.GetById(id);
+            return _mapper.PersonResponseDto(resultFromDb);
+
         }
 
-        public Task<SearchResponseModel<PeopleResponseDto>> GetList(SearchRequestModel<PeopleRequestDto, PeopleResponseDto> request)
+        public async Task<SearchResponseModel<PeopleResponseDto>> GetList(SearchRequestModel<PeopleRequestDto, PeopleResponseDto> request)
         {
-            throw new NotImplementedException();
+            var requestForDb = _mapper.SearchRequestModel_PeopleRequestModel_PeopleResponseModel(request);
+            var resultFromDb = await _peopleQueryRepository.GetList(requestForDb);
+            return _mapper.SearchResponseModel_PeopleResponseDto(resultFromDb);
+
         }
 
-        public Task UpdatePerson(UpdatePersonRequestDto request)
+        public async Task UpdatePerson(UpdatePersonRequestDto request)
         {
-            throw new NotImplementedException();
+            var requestFroDb = _mapper.UpdatePersonRequestModel(request);
+            await _peopleCommandRepository.UpdatePerson(requestFroDb);
         }
     }
 }
